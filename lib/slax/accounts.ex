@@ -146,6 +146,7 @@ defmodule Slax.Accounts do
     end
   end
 
+  @dialyzer {:nowarn_function, user_email_multi: 3}
   defp user_email_multi(user, email, context) do
     changeset =
       user
@@ -199,6 +200,7 @@ defmodule Slax.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
+  @dialyzer {:nowarn_function, update_user_password: 3}
   def update_user_password(user, password, attrs) do
     changeset =
       user
@@ -283,6 +285,7 @@ defmodule Slax.Accounts do
     end
   end
 
+  @dialyzer {:nowarn_function, confirm_user_multi: 1}
   defp confirm_user_multi(user) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, User.confirm_changeset(user))
@@ -340,6 +343,7 @@ defmodule Slax.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
+  @dialyzer {:nowarn_function, reset_user_password: 2}
   def reset_user_password(user, attrs) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, User.password_changeset(user, attrs))
